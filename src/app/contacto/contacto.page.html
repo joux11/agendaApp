@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>contacto</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="txt_nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Apellido</ion-label>
+    <ion-input type="text" [(ngModel)]="txt_apellido"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Teléfono</ion-label>
+    <ion-input type="text" [(ngModel)]="txt_telefono" (ngModelChange)="verificarTelefono($event)"></ion-input>
+
+  </ion-item>
+  <ion-label *ngIf="telefonoExiste" style="padding-left: 15px;" color="danger">{{mensajeError}}</ion-label>
+  <ion-item>
+    <ion-label>Email</ion-label>
+    <ion-input type="text" [(ngModel)]="txt_correo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-button [disabled]="disableButton" color="success" (click)="guardar()">Guardar</ion-button>
+  </ion-item>
+</ion-content>

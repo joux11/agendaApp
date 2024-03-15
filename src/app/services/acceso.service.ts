@@ -33,7 +33,7 @@ export class AccesoService {
     })
   }
 
-  async closeSession(id: string) {
+  async closeSession() {
     await Preferences.clear()
   }
 
