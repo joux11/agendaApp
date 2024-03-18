@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { isEmpty } from 'rxjs';
+import { IPersona } from 'src/app/interfaces/personas.interface';
 import { ResponseApi } from 'src/app/interfaces/response.interface';
 import { AccesoService } from 'src/app/services/acceso.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -32,13 +32,13 @@ export class ModalComponent {
       accion: "verificarUser",
       cedula: this.txtCedula
     }
-    this._accesoService.postData(body).subscribe((response: ResponseApi) => {
+    this._accesoService.postData(body).subscribe((response: ResponseApi<IPersona>) => {
 
       if (response.status) {
         this.isVerificado = true;
         const { cod_persona } = response.data[0]
         this.cod_persona = cod_persona
-        //this.changePassword()
+        //this.changePasswordioion()
 
       } else {
         this._modalCotroller.dismiss(response.msg, 'cancel');
@@ -62,7 +62,7 @@ export class ModalComponent {
     }
 
 
-    this._accesoService.postData(body).subscribe((response: ResponseApi) => {
+    this._accesoService.postData(body).subscribe((response: ResponseApi<IPersona>) => {
 
       if (response.status) {
         this._modalCotroller.dismiss(response.msg, 'verificar');

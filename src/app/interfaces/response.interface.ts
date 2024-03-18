@@ -1,8 +1,9 @@
-import { IPersona } from "./personas.interface";
-
-export interface ResponseApi {
+export interface ResponseApi<T> {
     status: boolean;
+    errors?: boolean;
+    validation?: boolean;
     msg: string;
-    data: IPersona[];
+    data: T[];
 }
+
 

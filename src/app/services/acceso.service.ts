@@ -16,15 +16,16 @@ export class AccesoService {
     public http: HttpClient
   ) { }
 
-  postData(body: any): Observable<ResponseApi> {
+  postData(body: any): Observable<ResponseApi<any>> {
     let head = new HttpHeaders({
       'Content-Type': 'application/json',
     })
     let options = {
       headers: head
     }
-    return this.http.post<ResponseApi>(this.url_Server, JSON.stringify(body), options);
+    return this.http.post<ResponseApi<any>>(this.url_Server, JSON.stringify(body), options);
   }
+
 
   async createSession(id: string, valor: string) {
     await Preferences.set({
@@ -33,7 +34,11 @@ export class AccesoService {
     })
   }
 
-  async closeSession() {
+
+  async closeSession(id: string) {
+    await Preferences.remove({ key: id })
+  }
+  async clearSession() {
     await Preferences.clear()
   }
 

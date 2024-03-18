@@ -23,6 +23,7 @@
     <ion-input type="text" [(ngModel)]="txt_correo"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-button [disabled]="disableButton" color="success" (click)="guardar()">Guardar</ion-button>
-  </ion-item>
+    <ion-button *ngIf="!isEdit" [disabled]="disableButton" color="success" (click)="guardar()">Guardar</ion-button>
+    <ion-button *ngIf="isEdit" [disabled]="disableButton" color="success" (click)="editar()">Editar</ion-button>
+  </ion-item>e
 </ion-content>

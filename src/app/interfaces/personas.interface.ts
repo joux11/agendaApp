@@ -6,4 +6,5 @@ export interface IPersona {
     ape_persona: string;
     clave_persona: string;
     correo_persona: string;
+    fecha_nacimiento: string
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AccesoService } from '../services/acceso.service';
 import { ResponseApi } from '../interfaces/response.interface';
 import { NavController } from '@ionic/angular';
+import { IPersona } from '../interfaces/personas.interface';
 
 @Component({
   selector: 'app-menu',
@@ -18,8 +19,11 @@ export class MenuPage {
 
   ) {
     this._accesoService.getSession("cod_persona").then((value) => {
+      if (!value) {
+        this._navController.navigateRoot('/login')
+      }
       this.getUser(value!)
-      console.log(value)
+
 
     })
 
@@ -33,7 +37,7 @@ export class MenuPage {
 
     }
 
-    this._accesoService.postData(body).subscribe((response: ResponseApi) => {
+    this._accesoService.postData(body).subscribe((response: ResponseApi<IPersona>) => {
       if (response.status) {
         this.username = `${response.data[0].nom_persona} ${response.data[0].ape_persona} `
       }
@@ -43,10 +47,15 @@ export class MenuPage {
 
 
   irPerfil() {
-    console.log("irPerfil");
+    this._navController.navigateRoot('/perfil')
   }
   irContactos() {
     this._navController.navigateRoot('/contactos')
+  }
+
+  salir() {
+    this._navController.navigateRoot('/login')
+    this._accesoService.clearSession()
   }
 
 }
